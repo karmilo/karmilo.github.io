@@ -57,7 +57,7 @@ function makeTime(num){
 
 function makeBitmap(str){
 	context.clearRect(0,0,document.body.clientWidth,document.body.clientHeight);
-	window.cx=MARGIN_X;
+	cx=MARGIN_X;
 	for(var i=0;i<6;i++){
 		//查找不同的数字下标
 		if(timeStatus&&str.substr(i,1)!=lastTime.substr(i,1)){
@@ -116,11 +116,11 @@ function Ball(x,y,vx,col){
 		context.beginPath();
 		this.y+=this.vy;
 		this.x+=this.vx;
-		if(this.y>=(document.body.clientHeight-(r+1)*2)){
-			this.y=document.body.clientHeight-(r+1)*2;
+		if(this.y>=(winHeight-(r+1)*2)){
+			this.y=winHeight-(r+1)*2;
 			this.vy=(-this.vy*(Math.random()*(0.2)+0.6)); //反弹
 		}
-		if(this.x>=(document.body.clientWidth-(r+1)*2)||this.x<=(r+1)*2){
+		if(this.x>=(winWidth-(r+1)*2)||this.x<=(r+1)*2){
 			delete balls[key]; //优化
 		}
 		context.arc(this.x,this.y,r,0,2*Math.PI);

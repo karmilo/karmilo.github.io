@@ -84,6 +84,7 @@ function makeNum(num){
 					if(digit[index][row][field]==1){
 						context.beginPath();
 						context.arc(cx+parseInt(field)*(r+1)*2,cy+parseInt(row)*(r+1)*2,r,0,2*Math.PI);
+						context.closePaht();
 						context.fillStyle="black";
 						context.fill();
 						if(addBall){
@@ -113,7 +114,6 @@ function Ball(x,y,vx,col){
 	this.color=col;
 	
 	this.drop=function(key){
-		context.beginPath();
 		this.y+=this.vy;
 		this.x+=this.vx;
 		if(this.y>=(winHeight-(r+1)*2)){
@@ -123,7 +123,9 @@ function Ball(x,y,vx,col){
 		if(this.x>=(winWidth-(r+1)*2)||this.x<=(r+1)*2){
 			delete balls[key]; //优化
 		}
+		context.beginPath();
 		context.arc(this.x,this.y,r,0,2*Math.PI);
+		context.closePaht();
 		context.fillStyle=this.color;
 		context.fill();
 		this.vy+=this.g;

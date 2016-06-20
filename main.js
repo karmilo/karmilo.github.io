@@ -25,7 +25,7 @@ window.onload=function(){
 		makeBitmap(context,timeStr);
 		ballsDrop();
 		timeStatus=false;
-	},50);
+	},30);
 };
 
 function makeTime(num){
@@ -70,9 +70,9 @@ function makeNum(num,cxt){
 						if(addBall){
 							//新建一个小球实例，添加到数组管理
 							if(Math.random()>0.5){
-								var vx=-Math.round(Math.random()*(8-4)+4);
+								var vx=-Math.round(Math.random()*(5-2)+2);
 							}else{
-								var vx=Math.round(Math.random()*(8-4)+4);
+								var vx=Math.round(Math.random()*(5-2)+2);
 							}
 							var col=color[Math.round(Math.random()*(color.length-1))];
 							balls[balls.length]=new Ball(cx+parseInt(field)*(r+1)*2,cy+parseInt(row)*(r+1)*2,vx,col);
@@ -88,7 +88,7 @@ function makeNum(num,cxt){
 function Ball(x,y,vx,col){
 	this.x=x;
 	this.y=y;
-	this.g=4;
+	this.g=1.5;
 	this.vx=vx;
 	this.vy=-6;
 	this.color=col;

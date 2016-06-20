@@ -84,7 +84,7 @@ function makeNum(num){
 					if(digit[index][row][field]==1){
 						context.beginPath();
 						context.arc(cx+parseInt(field)*(r+1)*2,cy+parseInt(row)*(r+1)*2,r,0,2*Math.PI);
-						context.closePaht();
+						context.closePath();
 						context.fillStyle="black";
 						context.fill();
 						if(addBall){
@@ -125,7 +125,7 @@ function Ball(x,y,vx,col){
 		}
 		context.beginPath();
 		context.arc(this.x,this.y,r,0,2*Math.PI);
-		context.closePaht();
+		context.closePath();
 		context.fillStyle=this.color;
 		context.fill();
 		this.vy+=this.g;

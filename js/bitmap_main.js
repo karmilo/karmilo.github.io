@@ -116,9 +116,9 @@ function Ball(x,y,vx,col){
 	this.drop=function(key){
 		this.y+=this.vy;
 		this.x+=this.vx;
-		if(this.y>=(winHeight-(r+1)*4)){
-			this.y=winHeight-(r+1)*4;
-			this.vy=(-this.vy*(Math.random()*(0.2)+0.6)); //反弹
+		if(this.y>=(winHeight-(r+1))){
+			this.y=winHeight-(r+1);
+			this.vy=(-this.vy*(Math.random()*(0.1)+0.7)); //反弹
 		}
 		this.vy+=this.g; //必须放在this.y自加之后，否则this.y一直大于最大值
 		if(this.x>=(winWidth-(r+1)*2)||this.x<=(r+1)*2){

@@ -44,6 +44,9 @@ nav .logo{
 	padding:10px;
 	color:#fff;
 }
+p{
+	font-size:15px;
+}
 #banner .inner p{
 	margin:20px;
 	color:#fff;
@@ -60,7 +63,7 @@ button{
 }
 #banner .more{
 	position:relative;
-	top:400px;
+	top:300px;
 	width:260px;
 	text-align:center;
 	margin:0 auto;
@@ -68,7 +71,8 @@ button{
 }
 .content .one-section{
 	background:#18B296;
-	padding:50px 0;
+	padding:100px 0;
+	color:#fff;
 }
 .content .one-section .wrapper{
 	max-width:500px;
@@ -79,4 +83,16 @@ button{
 	padding:10px 0;
 	margin:10px 0;
 	border-bottom:2px solid #138D77;
+}
+.content .one-section .wrapper .icons{
+	margin:30px;
+}
+.content .one-section .wrapper .icon{
+	display:inline-block;
+	width:80px;
+	height:80px;
+	background:#000;
+	transform:rotate(45deg);/* CSS3 */
+	margin:0 30px;
+	background:#138D77;
 }

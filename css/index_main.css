@@ -3,13 +3,16 @@
 	padding:0;
 	font-family:'微软雅黑';
 }
+body{
+	min-width:1000px;
+}
 nav{
-	background:#ccc;
 	height:50px;
+	background:rgba(0,0,0,0.5);
 }
 #banner{
-	background:#777;
-	height:700px;
+	background:rgba(0,0,0,0.2);
+	height:800px;
 }
 nav ul{
 	list-style:none;
@@ -22,9 +25,11 @@ nav ul li{
 a{
 	text-decoration:none;
 }
-nav ul li a,.logo a{
+nav a{
 	line-height:50px;
 	color:#fff;
+	font-size:14px;
+	font-weight:bold;
 }
 nav .logo{
 	float:left;
@@ -46,15 +51,19 @@ nav .logo{
 }
 p{
 	font-size:15px;
+	letter-spacing:1px;
 }
 #banner .inner p{
 	margin:20px;
 	color:#fff;
 }
 button{
+	cursor:pointer;
+}
+#banner button{
 	border:none;
 	border-radius:2px;
-	background:#333;
+	background:#F14646;
 	color:#eee;
 	padding:10px;
 }
@@ -69,30 +78,142 @@ button{
 	margin:0 auto;
 	color:#fff;
 }
+.more a{
+	color:#fff;
+}
 .content .one-section{
 	background:#18B296;
 	padding:100px 0;
 	color:#fff;
 }
-.content .one-section .wrapper{
-	max-width:500px;
+.wrapper{
+	max-width:600px;
 	margin:0 auto;
 	text-align:center;
 }
-.wrapper h2{
-	padding:10px 0;
-	margin:10px 0;
+.one-section .wrapper h2{
+	padding:25px 0;
+	margin:0 0 25px;
 	border-bottom:2px solid #138D77;
 }
-.content .one-section .wrapper .icons{
-	margin:30px;
+.one-section .wrapper .icons{
+	margin:50px 0;
 }
-.content .one-section .wrapper .icon{
+.one-section .wrapper .icon{
 	display:inline-block;
-	width:80px;
-	height:80px;
+	width:70px;
+	height:70px;
 	background:#000;
 	transform:rotate(45deg);/* CSS3 */
 	margin:0 30px;
-	background:#138D77;
+	border:1px solid #138D77;
+	background:#18B296;
+}
+.two-section{
+	color:#fff;
+	background:#1F375F;
+}
+.article{
+	font-size:0; /* 清除内容行高影响 */
+}
+.article .img{
+	width:45%;
+}
+.img img{
+	width:100%;
+	
+}
+.article > div{
+	float:left;
+}
+
+.article{
+	background:#192C4C;
+}
+.article:nth-child(even){ /* 偶数选择器 */
+	background:rgba(255,255,255,0.05); /* 添加蒙板 */
+}
+.article:after{ /* 伪元素 */
+	content:'';
+	display:block;
+	clear:both;
+}
+.two-section .text{
+	width:55%; /* 必须与图片刚好占100% */
+}
+.two-section .text p{
+	margin:25px 50px 0;
+}
+.two-section .text h2{
+	margin:50px 50px 0;
+	font-size:20px;
+}
+.three-section{
+	background:#946AAE;
+	color:#fff;
+}
+
+.cards .card{
+	width:50%;
+	float:left;
+	background:;
+}
+.cards:after{ /* 伪元素 */
+	content:'';
+	display:block;
+	clear:both;
+}
+.wrapper-title{
+	padding:100px;
+}
+.wrapper-title h2{
+	margin:25px 0;
+}
+.cards{
+	text-align:left;
+}
+.card h3,.card p{
+	margin:20px;
+}
+.three-section .wrapper{
+	padding:0 0 100px;
+}
+.card:nth-child(1){
+	background:rgba(0,0,0,0.04);
+}
+.card:nth-child(2){
+	background:rgba(0,0,0,0.08);
+}
+.card:nth-child(3){
+	background:rgba(0,0,0,0.12);
+}
+.card:nth-child(4){
+	background:rgba(0,0,0,0.16);
+}
+.card:nth-child(5){
+	background:rgba(0,0,0,0.20);
+}
+.card:nth-child(6){
+	background:rgba(0,0,0,0.24);
+}
+footer{
+	text-align:center;
+	color:#fff;
+}
+footer .share{
+	padding:50px 0;
+	background:rgba(0,0,0,0.2);
+}
+footer .share dd{
+	display:inline-block;
+	margin:0 5px;
+}
+footer .copyright{
+	padding:10px;
+	background:rgba(0,0,0,0.8);
+}
+.wall{
+	background:url(../image/backimage2.jpg) no-repeat center;
+	background-attachment:fixed;
+	background-size:cover;
 }

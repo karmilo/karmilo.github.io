@@ -4,7 +4,6 @@
 	font-family:'微软雅黑';
 }
 body{
-	min-width:1000px;
 }
 nav{
 	height:50px;
@@ -23,11 +22,14 @@ nav ul li{
 	margin:0 10px;
 }
 a{
+	color:rgba(255,255,255,0.6);
 	text-decoration:none;
+}
+a:hover {
+    color:#fff;
 }
 nav a{
 	line-height:50px;
-	color:#fff;
 	font-size:14px;
 	font-weight:bold;
 }
@@ -78,12 +80,9 @@ button{
 	margin:0 auto;
 	color:#fff;
 }
-.more a{
-	color:#fff;
-}
-.content .one-section{
+.one-section{
 	background:#18B296;
-	padding:100px 0;
+	padding:50px 0;
 	color:#fff;
 }
 .wrapper{
@@ -106,8 +105,10 @@ button{
 	background:#000;
 	transform:rotate(45deg);/* CSS3 */
 	margin:0 30px;
-	border:1px solid #138D77;
-	background:#18B296;
+	box-sizing:border-box;
+    border-bottom:1px solid #084238;
+    border-left:1px solid #fff;
+	background:#20AB92;
 }
 .two-section{
 	color:#fff;

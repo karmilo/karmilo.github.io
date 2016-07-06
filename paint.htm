@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+*{margin:0;padding:0;font-size:0;}
+#banner{
+	background:green;
+	padding:10px;
+}
+#banner>div{
+	width:300px;
+	height:300px;
+}
+</style>
+</head>
+<body>
+	<div id='banner'>
+		<div>
+		<canvas></canvas>
+		</div>
+		<div>
+		<canvas></canvas>
+		</div>
+	</div>
+	<script>
+	huixian('banner',[1,1,20,50],'blue',5,function(){
+		huixian('banner',[20,50,300,1],'red',3);
+	});
+	
+function huixian(id,line,style,weight,func){
+	var banner=document.getElementById(id);
+	var canvas=banner.getElementsByTagName('canvas');
+	for(var k in canvas){
+		if(canvas[k].parentElement){
+			canvas[k].width=canvas[k].parentElement.offsetWidth;
+			canvas[k].height=canvas[k].parentElement.offsetHeight;
+			canvas[k].cxt=canvas[k].getContext('2d');
+			canvas[k].cxt.strokeStyle=style;
+			canvas[k].cxt.lineWidth=weight;
+			canvas[k].cxt.timer=null;
+			drawline(line,canvas[k].cxt,func);
+		}
+	}
+}
+function drawline(line,cxt,func){
+	var speed_x=(line[2]-line[0])/(100);
+	var speed_y=(line[3]-line[1])/(100);
+
+	var cur_x=line[0];
+	var cur_y=line[1];
+	cxt.timer=window.setInterval(function(){
+		if((speed_x>0 && line[2]<=cur_x && speed_y>0 && line[3]<=cur_y)
+		||( speed_x>0 && line[2]<=cur_x && speed_y<0 && line[3]>=cur_y)
+		||( speed_x<0 && line[2]>=cur_x && speed_y>0 && line[3]<=cur_y)
+		||( speed_x<0 && line[2]>=cur_x && speed_y<0 && line[3]>=cur_y)){
+			clearInterval(cxt.timer);
+			if(func){
+				func();
+			}
+			return;
+		}
+		cur_x+=speed_x;
+		cur_y+=speed_y;
+		cxt.beginPath();
+		cxt.moveTo(line[0],line[1]);
+		cxt.lineTo(cur_x,cur_y);
+		cxt.stroke();
+	},30);
+}
+	</script>
+</body>
+</html>

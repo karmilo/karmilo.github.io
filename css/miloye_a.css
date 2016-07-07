@@ -25,15 +25,12 @@ a:hover{
 	background-size:cover;
 }
 #banner{
-	padding:250px 0 200px;
+	padding:300px 0 120px;
 	background:rgba(0,0,0,0.2);
 }
 #banner .inner{
 	max-width:200px;
 	margin:auto;
-}
-#banner hr{
-	border-top:2px solid #FFF;
 }
 #banner button{
 	border:none;
@@ -41,7 +38,7 @@ a:hover{
 	background:#F14646;
 	color:#eee;
 	padding:10px;
-	margin:50px 0;
+	margin:0 0 300px;
 }
 .one-section{
 	background:#557D23;

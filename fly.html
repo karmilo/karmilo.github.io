@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body onkeydown="move(event)" style="background-image:url(./image/fly/bg.jpg);color:#FFF;">
+分数：<header style="display:inline;">0</header><span style="float:right;">移动：wasd&nbsp;发射：j</span>
+<div id="feiji" style="position:absolute;left:100px;top:100px;">
+<img src="./image/fly/player.png" style="width:100px;">
+</div>
+<!--<div id="gongji" style="position:absolute;">
+<img src="./image/fly/foe.png" style="width:80px;">
+</div>-->
+</body>
+<script>
+
+	function Player(){
+
+		this.x = parseInt(feiji.style.left.substring(0,feiji.style.left.indexOf('p')));
+		this.y = parseInt(feiji.style.top.substring(0,feiji.style.top.indexOf('p')));
+		var speed = 8;
+		var bullet_speed = 5;
+		var bullet_imgs = new Array();
+		var score = 0;
+		var flag_bullet = true;
+		
+		this.move_left=function(){
+			this.x-=speed;
+			feiji.style.left=this.x+"px";
+		}
+		this.move_right=function(){
+			this.x+=speed;
+			feiji.style.left=this.x+"px";
+		}
+		this.move_up=function(){
+			this.y-=speed;
+			feiji.style.top=this.y+"px";
+		}
+		this.move_down=function(){
+			this.y+=speed;
+			feiji.style.top=this.y+"px";
+		}
+		/*this.isCatch=function(){
+			if(	  this.x>=foe.x-100
+				&&this.x<=foe.x+35
+				&&this.y>=foe.y-30
+				&&this.y<=foe.y+30){
+				window.alert("被抓住，死了~");
+				location.reload();
+			}
+		}*/
+		this.fire=function(){
+			//创建子弹
+			var bullet_img=document.createElement("img");
+			bullet_img.src="./image/fly/fire.png";
+			bullet_img.style.left=(this.x+101)+"px";
+			bullet_img.style.top=(this.y+35)+"px";
+			bullet_img.style.width="20px";
+			bullet_img.style.height="10px";
+			bullet_img.style.position="absolute";
+			document.body.appendChild(bullet_img);
+			//把创建的子弹放到数组里管理
+			bullet_imgs[bullet_imgs.length]=bullet_img;
+			//启动子弹
+			if(flag_bullet){
+				window.bullet_time_manage = window.setInterval("player.move_bullet()",5);
+			}
+		}
+		this.move_bullet=function(){
+			//把子弹数组里的全部子弹移动一下
+			flag_bullet=true;
+			for(var key in bullet_imgs){
+				var bullet_img_x = parseInt(bullet_imgs[key].style.left.substring(0,bullet_imgs[key].style.left.indexOf('p')))+bullet_speed;
+				var bullet_img_y = parseInt(bullet_imgs[key].style.top.substring(0,bullet_imgs[key].style.top.indexOf('p')));
+				var f1=true
+				for(var k in foe.foe_imgs){
+					var foe_x = parseInt(foe.foe_imgs[k].obj.style.left.substring(0,foe.foe_imgs[k].obj.style.left.indexOf('p')));
+					var foe_y = parseInt(foe.foe_imgs[k].obj.style.top.substring(0,foe.foe_imgs[k].obj.style.top.indexOf('p')));
+					if(bullet_img_x>=foe_x&&bullet_img_x<=foe_x+80&&bullet_img_y>=foe_y+10&&bullet_img_y<=foe_y+55){
+						bullet_imgs[key].parentNode.removeChild(bullet_imgs[key]);
+						delete bullet_imgs[key];
+						foe.foe_imgs[k].obj.parentNode.removeChild(foe.foe_imgs[k].obj);
+						delete foe.foe_imgs[k];
+						fenshu.innerHTML=++score; //加分，先++
+						f1=false;
+						break;
+					}
+				}
+				if(f1&&bullet_img_x>=(document.body.clientWidth-10)){
+					//到达窗口右边缘
+					bullet_imgs[key].parentNode.removeChild(bullet_imgs[key]);
+					delete bullet_imgs[key];
+				}else{
+					//移动
+					if(bullet_imgs[key]!=""&&bullet_imgs[key]!=undefined&&bullet_imgs[key]!=null) bullet_imgs[key].style.left=bullet_img_x+"px";
+				}
+				flag_bullet=false; //存在子弹，不用清除时间管理
+			}
+			if(flag_bullet){
+				window.clearInterval(window.bullet_time_manage);
+			}
+		}
+	}
+	
+	function Foe(){
+		
+		this.x = 0;
+		this.y = 0;
+		this.foe_imgs = new Array();
+		this.foe_time_manage = null;
+		var flag_foe=true;
+		
+		this.go=function(){
+			//创建敌机
+			var foe_img=document.createElement("img");
+			foe_img.src="./image/fly/foe.png";
+			foe_img.style.left=this.x+"px";
+			foe_img.style.top=this.y+"px";
+			foe_img.style.width="80px";
+			foe_img.style.position="absolute";
+			document.body.appendChild(foe_img);
+			//把创建的敌机放到数组里管理
+			this.foe_imgs[this.foe_imgs.length] = {obj:foe_img,x:-2,y:1};
+			//启动敌机
+			if(flag_foe){
+				this.foe_time_manage = window.setInterval("foe.fly()",10);
+			}
+			if(this.foe_imgs.length%5==0){
+				window.clearInterval(window.go_time_manage);
+				window.clearTimeout(window.start_timeout);
+				window.start();
+			}
+			//window.clearTimeout(window.start_timeout);
+		}
+		this.fly=function (){
+			flag_foe=true;
+			for(var key in this.foe_imgs){
+				var foe_img_x = parseInt(this.foe_imgs[key].obj.style.left.substring(0,this.foe_imgs[key].obj.style.left.indexOf('p')));
+				var foe_img_y = parseInt(this.foe_imgs[key].obj.style.top.substring(0,this.foe_imgs[key].obj.style.top.indexOf('p')));
+				var x_speed = parseInt(this.foe_imgs[key].x);
+				var y_speed = parseInt(this.foe_imgs[key].y);
+				foe_img_x+=2*x_speed;
+				foe_img_y+=2*y_speed;
+				this.foe_imgs[key].obj.style.left=foe_img_x+'px';
+				this.foe_imgs[key].obj.style.top=foe_img_y+'px';
+				//换方向
+				getWH();
+				if(foe_img_x<=0||foe_img_x+this.foe_imgs[key].obj.offsetWidth>=winWidth){
+					this.foe_imgs[key].x=-x_speed;
+				}
+				if(foe_img_y<=0||foe_img_y+this.foe_imgs[key].obj.offsetHeight>=winHeight){
+					this.foe_imgs[key].y=-y_speed;
+				}
+				flag_foe=false;
+			}
+			if(flag_foe){
+				window.clearInterval(this.foe_time_manage);
+				//window.start();
+			}
+		}
+	}
+
+/*这里开始启动程序*/
+
+	//初始化浏览器窗口宽高
+	var winWidth = 0;
+	var winHeight = 0;
+	function getWH(){
+		if (window.innerWidth) winWidth = window.innerWidth; else if ((document.body) && (document.body.clientWidth)) winWidth = document.body.clientWidth;
+		if (window.innerHeight) winHeight = window.innerHeight; else if ((document.body) && (document.body.clientHeight)) winHeight = document.body.clientHeight;
+	}
+	
+	//开始dom操作
+	var feiji=document.getElementById("feiji");
+	var fenshu=document.getElementsByTagName('header')[0];
+	
+	//实例化
+	var foe = new Foe();
+	var player = new Player();
+	var go_time_manage = null;
+	var bullet_time_manage = null;
+	var start_timeout = null;
+	
+	function start(){
+		//先定义敌机队伍出现位置
+		getWH();
+		foe.x = winWidth-100;
+		foe.y = 0;
+		if(Math.random()>0.5){
+			foe.y = winHeight-100;
+		}
+		//正式出动
+		window.start_timeout = window.setTimeout("window.go_time_manage = window.setInterval('foe.go()',200)",2000);
+	}
+	start();
+	
+	function move(event){
+		getWH();
+		switch(event.keyCode){
+			case 65:	//a键
+				if(player.x>0) player.move_left();
+				break;
+			case 87:	//w键
+				if(player.y>0) player.move_up();
+				break;
+			case 83:	//s键
+				if(player.y<(winHeight-50)) player.move_down();
+				break;
+			case 68:	//d键
+				if(player.x<(winWidth-110)) player.move_right();
+				break;
+			case 74:	//j键
+				player.fire();
+				break;
+			default:
+				break;
+		}
+	}
+
+</script>
+</html>

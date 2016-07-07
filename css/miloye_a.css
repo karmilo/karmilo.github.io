@@ -4,6 +4,9 @@
 nav{
 	background:rgba(0,0,0,0.5);
 }
+p{
+	letter-spacing:1px;
+}
 .navbar{
 	border-radius:0;
 }
@@ -112,15 +115,22 @@ a:hover{
 }
 .three-section .row:nth-child(odd)>div:nth-child(2){
 	background:rgba(0,0,0,0.06);
+	height:160px;
 }
 .three-section .row:nth-child(odd)>div:nth-child(3){
 	background:rgba(0,0,0,0.12);
+	height:160px;
 }
 .three-section .row:nth-child(even)>div:nth-child(2){
 	background:rgba(0,0,0,0.12);
+	height:160px;
 }
 .three-section .row:nth-child(even)>div:nth-child(3){
 	background:rgba(0,0,0,0.06);
+	height:160px;
+}
+.three-section .row>div>div:nth-child(1){
+	height:110px;
 }
 footer{
 	text-align:center;

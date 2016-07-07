@@ -61,19 +61,22 @@ a:hover{
 	background:#2D5600;
 	border-radius:40px;
 	margin:20px auto;
-	padding:1.8em 0 0 1.8em;
+	padding:1.8em 0 0 1.9em;
 }
-.icon-forward, .icon-next, .icon-forward:after, .icon-next:before{
+.one-section .icon-forward, .icon-next, .icon-forward:after, .icon-next:before{
 	border-color:transparent transparent transparent #557D23;
 }
-.icon-next:after, .icon-prev:after{
+.one-section .icon-next:after, .icon-prev:after{
 	background-color:#557D23;
 }
-.icon-rewind, .icon-prev, .icon-rewind:after, .icon-prev:before {
+.one-section .icon-rewind, .icon-prev, .icon-rewind:after, .icon-prev:before {
     border-color:transparent #557D23 transparent transparent;
 }
-.icon-pause, .icon-pause:after{
+.one-section .icon-pause, .icon-pause:after{
 	background-color:#557D23;
+}
+.one-section .icon-play{
+	border-color: transparent transparent transparent rgb(85, 125, 35);
 }
 .two-section{
 	background:#1F375F;

@@ -46,10 +46,7 @@ a:hover{
 }
 .one-section .wrapper{
 	max-width:300px;
-	margin:auto;
-}
-.one-section .wrapper hr{
-	border-top:2px solid #2D5600;
+	margin:20px auto 40px;
 }
 .one-section .container{
 	margin-top:10px;
@@ -77,6 +74,9 @@ a:hover{
 }
 .one-section .icon-play{
 	border-color: transparent transparent transparent rgb(85, 125, 35);
+}
+.one-section #title{
+	background:#2D5600;
 }
 .two-section{
 	background:#1F375F;

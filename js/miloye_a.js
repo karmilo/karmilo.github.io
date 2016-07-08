@@ -36,3 +36,7 @@ function playMusic(url){
 	title.innerHTML=music[audio.src.substr(audio.src.indexOf('.mp3')-1,1)];
 	play.querySelector('span').querySelector('span').className='icon-pause';
 }
+$(document).ready(function(){
+	$('.hr span').animate({width:'100%',opacity:0.8},1500);
+	$('#banner h1').animate({opacity:0.8,fontSize:'36px'},1500);
+});

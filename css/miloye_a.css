@@ -27,7 +27,7 @@ nav .navbar-brand{
 	font-weight:bold;
 }
 #banner{
-	padding:250px 0 120px;
+	padding:255px 0 125px;
 	background:rgba(0,0,0,0.2);
 }
 #banner .inner{
@@ -35,7 +35,7 @@ nav .navbar-brand{
 	margin:auto;
 }
 #banner h1{
-	margin:25px auto;
+	margin:20px auto;
 	opacity:0;
 	height:36px;
 	line-height:36px;
@@ -103,7 +103,7 @@ nav .navbar-brand{
 	background:#2D5600;
 }
 .two-section{
-	background:#1F375F;
+	background:rgba(31,55,95,0.95);
 }
 .two-section .img{
 	width:100%;

@@ -1,205 +1,205 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>miloye's blog</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/cikonss.css" rel="stylesheet">
-    <script src="js/html5shiv.min.js"></script>
-    <script src="js/respond.min.js"></script>
-	<link href='css/miloye_a.css' rel="stylesheet">
-  </head>
-  <body>
-  <div class="wall">
-	<nav class="navbar navbar-fixed-top">
-	  <div class="container-fluid">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>miloye's blog</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/cikonss.css" rel="stylesheet">
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<link href='css/miloye_a.css' rel="stylesheet">
+</head>
+<body>
+<div class="wall">
+<nav class="navbar navbar-fixed-top">
+	<div class="container-fluid">
 		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		  </button>
-		  <a class="navbar-brand" href="miloye_a.html">miloye</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="miloye_a.html">miloye</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		  <ul class="nav navbar-nav navbar-right">
-			<li><a href="#">PHP</a></li>
-			<li><a href="#">JavaScript</a></li>
-			<li><a href="#">MySQL</a></li>
-			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多 <span class="caret"></span></a>
-			  <ul class="dropdown-menu">
-				<li><a href="#">CSS</a></li>
-				<li><a href="#">Node.js</a></li>
-				<li><a href="#">Linux</a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="#">关于</a></li>
-			  </ul>
-			</li>
-		  </ul>
-		</div>
-	  </div>
-	</nav>
-	<div id="banner" class="text-center section section1">
-		<div class="inner">
-			<div class='hr'><span id='hr1'></span></div>
-				<h1>Welcome</h1>
-			<div class='hr'><span id='hr1'></span></div>
-			<a href='#F3'><button>KNOW ME</button></a>
-		</div>
-		<div class="more">
-			<a href='#F1'>更多</a>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="miloye_php.html" target="_blank">PHP</a></li>
+				<li><a href="#">JavaScript</a></li>
+				<li><a href="#">MySQL</a></li>
+				<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多 <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">CSS</a></li>
+					<li><a href="#">Node.js</a></li>
+					<li><a href="#">Linux</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="#">关于</a></li>
+				</ul>
+				</li>
+			</ul>
 		</div>
 	</div>
-	<section class="one-section text-center section section2" id="F1">
-		<audio preload id='audio' src="media/1.mp3"></audio>
-		<div class="wrapper">
-			<h2>音乐欣赏</h2>
-			<p>好东西，就是要分享！</p>
+</nav>
+<div id="banner" class="text-center section section1">
+	<div class="inner">
+		<div class='hr'><span id='hr1'></span></div>
+			<h1>Welcome</h1>
+		<div class='hr'><span id='hr1'></span></div>
+		<a href='#F3'><button>KNOW ME</button></a>
+	</div>
+	<div class="more">
+		<a href='#F1'>更多</a>
+	</div>
+</div>
+<section class="one-section text-center section section2" id="F1">
+	<audio preload id='audio' src="media/1.mp3"></audio>
+	<div class="wrapper">
+		<h2>音乐欣赏</h2>
+		<p>好东西，就是要分享！</p>
+	</div>
+	<div class="container-fluid">
+	<div class='row' id='title'></div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-2" id='prev'>
+				<div class='icon-box'>
+				<span class="icon icon-mid"><span class="icon-prev"></span></span>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class='icon-box' id='play'>
+				<span class="icon icon-mid"><span class="icon-play"></span></span>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class='icon-box' id='next'>
+				<span class="icon icon-mid"><span class="icon-next"></span></span>
+				</div>
+			</div>
+			<div class="col-md-3">
+			</div>
 		</div>
-		<div class="container-fluid">
-		<div class='row' id='title'></div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
+	</div>
+</section>
+<section class="two-section">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-5">
+				<div class='img'>
+					<img src='image/duowen.jpg'>
 				</div>
-				<div class="col-md-2" id='prev'>
-					<div class='icon-box'>
-					<span class="icon icon-mid"><span class="icon-prev"></span></span>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class='icon-box' id='play'>
-					<span class="icon icon-mid"><span class="icon-play"></span></span>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class='icon-box' id='next'>
-					<span class="icon icon-mid"><span class="icon-next"></span></span>
-					</div>
-				</div>
-				<div class="col-md-3">
+			</div>
+			<div class="col-md-7">
+				<div class='text'>
+					<h2>欣赏</h2>
+					<p>欣赏朋友是一种境界，善待朋友是一种胸怀，关心朋友是一种品质，理解朋友是一种涵养，帮助朋友是一种快乐，学习朋友是一种智慧，团结朋友是一种能力，借鉴朋友是一种收获，看望朋友是一种习惯，愿朋友幸福每一天!快乐每一天!</p>
 				</div>
 			</div>
 		</div>
-	</section>
-	<section class="two-section">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-5">
-					<div class='img'>
-						<img src='image/duowen.jpg'>
-					</div>
-				</div>
-				<div class="col-md-7">
-					<div class='text'>
-						<h2>欣赏</h2>
-						<p>欣赏朋友是一种境界，善待朋友是一种胸怀，关心朋友是一种品质，理解朋友是一种涵养，帮助朋友是一种快乐，学习朋友是一种智慧，团结朋友是一种能力，借鉴朋友是一种收获，看望朋友是一种习惯，愿朋友幸福每一天!快乐每一天!</p>
-					</div>
+		<div class="row">
+			<div class="col-md-7">
+				<div class='text'>
+					<h2>爱与家庭</h2>
+					<p>前世修得网相逢， 今生得来屏为邻。 声声道尽祝福语， 句句出自肺腑音。 深深牢记情与意， 点点滴滴暖人心。 无论相伴有多远， 遥盼健康永延年。</p>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-7">
-					<div class='text'>
-						<h2>爱与家庭</h2>
-						<p>前世修得网相逢， 今生得来屏为邻。 声声道尽祝福语， 句句出自肺腑音。 深深牢记情与意， 点点滴滴暖人心。 无论相伴有多远， 遥盼健康永延年。</p>
-					</div>
-				</div>
-				<div class="col-md-5">
-					<div class='img'>
-						<img src='image/爱与家庭任务.jpg'>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-5">
-					<div class='img'>
-						<img src='image/cunzi.jpg'>
-					</div>
-				</div>
-				<div class="col-md-7">
-					<div class='text'>
-						<h2>宁静</h2>
-						<p>只想做一个安静的美男子。</p>
-					</div>
+			<div class="col-md-5">
+				<div class='img'>
+					<img src='image/爱与家庭任务.jpg'>
 				</div>
 			</div>
 		</div>
-	</section>
-	<section class="three-section text-center" id="F3">
-		<div class="wrapper">
-			<h2>小作品</h2>
-			<p>好东西，就是要分享！</p>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-3">
-					<div>
-						<a href='fly.html' target="_blank"><h3>飞机子弹</h3></a>
-						<p>学完JavaScript基本课程之后首次完成的作品</p>
-					</div>
-					<div>
-						<p>2014-02-11</p>
-					</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class='img'>
+					<img src='image/cunzi.jpg'>
 				</div>
-				<div class="col-md-3">
-					<div>
-						<a href='bitmap.html' target="_blank"><h3>时刻彩球</h3></a>
-						<p>Canvas系列 - 模仿是学习第一步，了解另一种动画</p>
-					</div>
-					<div>
-						<p>2015-12-09</p>
-					</div>
-				</div>
-				<div class="col-md-3"></div>
 			</div>
-			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-3">
-					<h3></h3>
-					<p></p>
+			<div class="col-md-7">
+				<div class='text'>
+					<h2>宁静</h2>
+					<p>只想做一个安静的美男子。</p>
 				</div>
-				<div class="col-md-3">
-					<h3></h3>
-					<p></p>
-				</div>
-				<div class="col-md-3"></div>
-			</div>
-			<div class="row">
-				<div class="col-md-3"></div>
-				<div class="col-md-3">
-					<h3></h3>
-					<p></p>
-				</div>
-				<div class="col-md-3">
-					<h3></h3>
-					<p></p>
-				</div>
-				<div class="col-md-3"></div>
 			</div>
 		</div>
-	</section>
-	<footer>
-		<div class="share">
-			<dl>
-				<dd></dd>
-				<dd>May well</dd>
-				<dd></dd>
-			</dl>
+	</div>
+</section>
+<section class="three-section text-center" id="F3">
+	<div class="wrapper">
+		<h2>小作品</h2>
+		<p>好东西，就是要分享！</p>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				<div>
+					<a href='fly.html' target="_blank"><h3>飞机子弹</h3></a>
+					<p>学完JavaScript基本课程之后首次完成的作品</p>
+				</div>
+				<div>
+					<p>2014-02-11</p>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div>
+					<a href='bitmap.html' target="_blank"><h3>时刻彩球</h3></a>
+					<p>Canvas系列 - 模仿是学习第一步，了解另一种动画</p>
+				</div>
+				<div>
+					<p>2015-12-09</p>
+				</div>
+			</div>
+			<div class="col-md-3"></div>
 		</div>
-		<div class="copyright">
-			<span>© 2016 YeJiaming</span>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				<h3></h3>
+				<p></p>
+			</div>
+			<div class="col-md-3">
+				<h3></h3>
+				<p></p>
+			</div>
+			<div class="col-md-3"></div>
 		</div>
-	</footer>
-  </div>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/music.js"></script>
-  <script src="js/miloye_a.js"></script>
-  </body>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				<h3></h3>
+				<p></p>
+			</div>
+			<div class="col-md-3">
+				<h3></h3>
+				<p></p>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</section>
+<footer>
+	<div class="share">
+		<dl>
+			<dd></dd>
+			<dd>May well</dd>
+			<dd></dd>
+		</dl>
+	</div>
+	<div class="copyright">
+		<span>© 2016 YeJiaming</span>
+	</div>
+</footer>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/music.js"></script>
+<script src="js/miloye_a.js"></script>
+</body>
 </html>

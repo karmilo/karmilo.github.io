@@ -25,17 +25,16 @@ a:hover{
 	background-size:cover;
 }
 #banner{
-	padding:280px 0 90px;
+	padding:250px 0 120px;
 	background:rgba(0,0,0,0.2);
 }
 #banner .inner{
-	max-width:180px;
+	max-width:170px;
 	margin:auto;
 }
 #banner h1{
 	margin:25px auto;
 	opacity:0;
-	font-size:26px;
 	height:36px;
 	line-height:36px;
 }
@@ -151,6 +150,10 @@ a:hover{
 }
 .three-section .row>div>div:nth-child(1){
 	height:110px;
+}
+.three-section h3{
+	margin:0;
+	padding:15px 0;
 }
 footer{
 	text-align:center;

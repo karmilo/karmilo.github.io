@@ -33,10 +33,11 @@ function playMusic(url){
 	audio.src=url;
 	audio.load();
 	audio.play();
-	title.innerHTML=music[audio.src.substr(audio.src.indexOf('.mp3')-1,1)];
+	title.innerHTML=music[url.substr(url.indexOf('.mp3')-1,1)];
 	play.querySelector('span').querySelector('span').className='icon-pause';
 }
 $(document).ready(function(){
-	$('.hr span').animate({width:'100%',opacity:0.8},1500);
-	$('#banner h1').animate({opacity:0.8,fontSize:'36px'},1500);
+	$('.hr span').animate({width:'100%',opacity:0.8},1800,function(){
+		$('#banner h1').animate({opacity:0.8},1800);
+	});
 });

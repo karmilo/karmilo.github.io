@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miloye's blog</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/cikonss.css" rel="stylesheet">
+<script src="../js/html5shiv.min.js"></script>
+<script src="../js/respond.min.js"></script>
+<link href="../css/miloye_php.css" rel="stylesheet">
+</head>
+<body>
+<div class="wall">
+<nav class="navbar navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="../miloye_a.html">Miloye</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="miloye_PHP.html">PHP</a></li>
+				<li><a href="miloye_JavaScript.html">JavaScript</a></li>
+				<li><a href="miloye_MySQL.html">MySQL</a></li>
+				<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">更多 <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="miloye_CSS.html">CSS</a></li>
+					<li><a href="miloye_Node.js.html">Node.js</a></li>
+					<li><a href="miloye_Linux.html">Linux</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="miloye_about.html">关于</a></li>
+				</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<section id='F1'>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9">
+				<section class='content-section' id='overview'>
+					<h1>概述</h1>
+					<p>此文档仅用于记录、复习，可能不适合初学者用于学习，谨记。</p>
+				</section>
+				<section class='content-section' id='filesystem'>
+					<h1>文件系统</h1>
+					<p>PHP脚本有一系列函数，可以处理系统文件。</p>
+					<h2>创建/打开文件</h2>
+					<h3><a href="http://php.net/manual/zh/function.fopen.php" target="_blank">fopen</a></h3>
+					<code>resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )</code>
+					<p>打开一个文件或URL，返回资源类型（文件指针）；第二个参数常用<code>'r'</code>或<code>'a+'</code>，表示'只读'或'累加'，常见如下：</p>
+					<table class="table table-hover">
+						<tr><td>'r'</td><td>读</td><td>文件指针指向文件头</td></tr>
+						<tr><td>'r+'</td><td>读写</td><td>文件指针指向文件头</td></tr>
+						<tr><td>'w'</td><td>写</td><td>文件指针指向文件头，并将文件大小截为零，可创建文件</td></tr>
+						<tr><td>'w+'</td><td>读写</td><td>文件指针指向文件头，并将文件大小截为零，可创建文件</td></tr>
+						<tr><td>'a'</td><td>写</td><td>文件指针指向文件末尾，可创建文件</td></tr>
+						<tr><td>'a+'</td><td>读写</td><td>文件指针指向文件末尾，可创建文件</td></tr>
+					</table>
+					<h3><a href="http://php.net/manual/zh/function.file-put-contents.php" target="_blank">file_put_contents</a></h3>
+					<code>int file_put_contents ( string $filename , mixed $data [, int $flags = 0 [, resource $context ]] )</code>
+					<p>功能同依次调用<code>fopen()</code>，<code>fwrite()</code>以及<code>fclose()</code>。可创建文件，默认覆盖原文件，除非flags设置为<code>FILE_APPEND</code>。</p>
+					<h2>读取文件</h2>
+					<h3><a href="http://php.net/manual/zh/function.fread.php" target="_blank">fread</a></h3>
+					<code>string fread ( resource $handle , int $length )</code>
+					<p>从文件指针 handle 读取最多 length 个字节。</p>
+					<h3><a href="http://php.net/manual/zh/function.file-get-contents.php" target="_blank">file_get_contents</a></h3>
+					<code>string file_get_contents ( string $filename [, bool $use_include_path = false [, resource $context [, int $offset = -1 [, int $maxlen ]]]] )</code>
+					<p>直接把文件读取到一个字符串中，并返回。另外<code>file()</code>是把文件读取到一个数组中。</p>
+					<p>对大文件的读取：</p>
+<pre>
+&lt;?php
+  $file_path="./temp/test.txt";
+  $fp=fopen($file_path,"a+");
+  $buffer=1024;		                   //表示每次读取1KB数据
+  $str=’’;
+  while(!feof($fp)){
+    $str=fread($fp,$buffer);
+    $str=str_replace("\r\n","&lt;br&gt;",$str);  //转换换行符
+    echo $str;
+  }
+  fclose($fp);
+?&gt;
+</pre>
+					<h2>写入/修改文件</h2>
+					<h3><a href="http://php.net/manual/zh/function.fwrite.php" target="_blank">fwrite</a></h3>
+					<code>int fwrite ( resource $handle , string $string [, int $length ] )</code>
+					<p>把 string 的内容写入文件指针 handle 处。</p>
+					<h2>获取文件属性</h2>
+					<p><code>array fstat ( resource $handle )</code>  获取文件信息，返回数组，类似于：</p>
+<pre>
+Array
+(
+    [dev] => 771
+    [ino] => 488704
+    [mode] => 33188
+    [nlink] => 1
+    [uid] => 0
+    [gid] => 0
+    [rdev] => 0
+    [size] => 1114
+    [atime] => 1061067181
+    [mtime] => 1056136526
+    [ctime] => 1056136526
+    [blksize] => 4096
+    [blocks] => 8
+)
+</pre>
+					<p>常用的还有：</p>
+					<p><code>bool file_exists ( string $filename )</code>  检查文件或目录是否存在</p>
+					<p><code>int filesize ( string $filename )</code>  返回int文件字节大小</p>
+					<p><code>int fileatime ( string $filename )</code>  返回int文件上次访问时间</p>
+					<p><code>int filectime ( string $filename )</code>  返回int文件所有者/所在组被修改的时间</p>
+					<p><code>int filemtime ( string $filename )</code>  返回int文件被修改时间</p>
+				</section>
+				<section class='content-section' id='design'>
+					<h1>haomeii</h1>
+					<p>liyonguuudded kdfeo dlfeom</p>
+				</section>
+			</div>
+			<div class="col-sm-3">
+				<ul class="nav nav-list bs-docs-sidenav affix hidden-print hidden-xs" id='nav'></ul>
+			</div>
+		</div>
+	</div>
+</section>
+<footer>
+	<div class="share">
+		<dl>
+			<dd></dd>
+			<dd>May well</dd>
+			<dd></dd>
+		</dl>
+	</div>
+	<div class="copyright">
+		<span>© 2016 YeJiaming</span>
+	</div>
+</footer>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/miloye_php.js"></script>
+</body>
+</html>

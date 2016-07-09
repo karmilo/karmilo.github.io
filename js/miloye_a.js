@@ -47,7 +47,8 @@ function playMusic(url){
 	play.querySelector('span').querySelector('span').className='icon-pause';
 }
 $(document).ready(function(){
-	$('.hr span').animate({width:'100%',opacity:0.8},1800,function(){
-		$('#banner h1').animate({opacity:0.8},1800);
-	});
+	$('.hr span').animate({width:'100%',opacity:0.8},1800);
+	setTimeout(function(){
+		$('#banner h1').animate({opacity:0.8},1800)
+	},1800);
 });

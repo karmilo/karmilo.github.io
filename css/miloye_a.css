@@ -32,7 +32,7 @@ nav .navbar-brand{
 }
 #banner{
 	padding:255px 0 125px;
-	background:rgba(0,0,0,0.2);
+	background-color:rgba(0,0,0,1);
 }
 #banner .inner{
 	max-width:170px;

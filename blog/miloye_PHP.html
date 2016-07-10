@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="wall">
-<nav class="navbar navbar-fixed-top">
+<nav class="navbar" id='top'>
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -53,7 +53,7 @@
 				</section>
 				<section class='content-section' id='filesystem'>
 					<h1>文件系统</h1>
-					<p>PHP脚本有一系列函数，可以处理系统文件。</p>
+					<p>PHP作为服务器脚本，必须有文件系统操作的功能。</p>
 					<h2>创建/打开文件</h2>
 					<h3><a href="http://php.net/manual/zh/function.fopen.php" target="_blank">fopen</a></h3>
 					<code>resource fopen ( string $filename , string $mode [, bool $use_include_path = false [, resource $context ]] )</code>
@@ -79,18 +79,21 @@
 					<p>对大文件的读取：</p>
 <pre>
 &lt;?php
-  $file_path="./temp/test.txt";
-  $fp=fopen($file_path,"a+");
-  $buffer=1024;		                   //表示每次读取1KB数据
-  $str=’’;
-  while(!feof($fp)){
-    $str=fread($fp,$buffer);
-    $str=str_replace("\r\n","&lt;br&gt;",$str);  //转换换行符
-    echo $str;
-  }
-  fclose($fp);
+    $file_path="./temp/test.txt";
+    $fp=fopen($file_path,"a+");
+    $buffer=1024;		                   //表示每次读取1KB数据
+    $str='';
+    while(!feof($fp)){
+        $str=fread($fp,$buffer);
+        $str=str_replace("\r\n","&lt;br&gt;",$str);  //转换换行符
+        echo $str;
+    }
+    fclose($fp);
 ?&gt;
 </pre>
+					<h3><a href="http://php.net/manual/zh/function.parse-ini-file.php" target="_blank">parse_ini_file</a></h3>
+					<code>array parse_ini_file ( string $filename [, bool $process_sections = false [, int $scanner_mode = INI_SCANNER_NORMAL ]] )</code>
+					<p>该函数会把类似于php.ini的ini文件中的配置信息读取到一个关联数组；<br>文件信息中，'='（等号）左边的当成键名，右边当成键值。</p>
 					<h2>写入/修改文件</h2>
 					<h3><a href="http://php.net/manual/zh/function.fwrite.php" target="_blank">fwrite</a></h3>
 					<code>int fwrite ( resource $handle , string $string [, int $length ] )</code>
@@ -115,16 +118,192 @@ Array
     [blocks] => 8
 )
 </pre>
-					<p>常用的还有：</p>
-					<p><code>bool file_exists ( string $filename )</code>  检查文件或目录是否存在</p>
-					<p><code>int filesize ( string $filename )</code>  返回int文件字节大小</p>
-					<p><code>int fileatime ( string $filename )</code>  返回int文件上次访问时间</p>
-					<p><code>int filectime ( string $filename )</code>  返回int文件所有者/所在组被修改的时间</p>
-					<p><code>int filemtime ( string $filename )</code>  返回int文件被修改时间</p>
+					<p>常用的还有：<br>
+					<p><code>bool file_exists ( string $filename )</code>  检查文件或目录是否存在<br>
+					<code>int filesize ( string $filename )</code>  返回int文件字节大小<br>
+					<code>int fileatime ( string $filename )</code>  返回int文件上次访问时间<br>
+					<code>int filectime ( string $filename )</code>  返回int文件所有者/所在组被修改的时间<br>
+					<code>int filemtime ( string $filename )</code>  返回int文件被修改时间</p>
+					<h2>复制文件</h2>
+					<h3><a href="http://php.net/manual/zh/function.copy.php" target="_blank">copy</a></h3>
+					<code>bool copy ( string $source , string $dest [, resource $context ] )</code>
+					<p>将文件从 source 拷贝到 dest。<br>如果要移动文件的话，请使用<code>rename()</code>函数。<br>该函数只能识别平台默认编码（windows是gb2312）的路径，所以若是目录中含有中文，需要先使用<code>iconv()</code>函数来转换路径字符串：</p>
+<pre>
+&lt;?php
+    $file_path=iconv("utf-8","gb2312",$file_path);
+?&gt;
+</pre>
+					<h2>文件夹操作</h2>
+					<h3><a href="http://php.net/manual/zh/function.mkdir.php" target="_blank">mkdir</a></h3>
+					<code>bool mkdir ( string $pathname [, int $mode = 0777 [, bool $recursive = false [, resource $context ]]] )</code>
+					<p>尝试创建一个 pathname 指向的文件夹；mode 文件夹权限默认为最高权限；recursive 默认不允许多级创建文件夹。</p>
+					<h3><a href="http://php.net/manual/zh/function.is-dir.php" target="_blank">is_dir</a></h3>
+					<code>bool is_dir ( string $filename )</code>
+					<p>判断路径是否存在或文件是否为目录。</p>
+					<h3><a href="http://php.net/manual/zh/function.rmdir.php" target="_blank">rmdir</a></h3>
+					<code>bool rmdir ( string $dirname [, resource $context ] )</code>
+					<p>删除目录。如果文件夹内存在文件则不能删除。</p>
+					<h2>删除文件</h2>
+					<h3><a href="http://php.net/manual/zh/function.unlink.php" target="_blank">unlink</a></h3>
+					<code>bool unlink ( string $filename [, resource $context ] )</code>
+					<p>删除文件。需要事先使用<code>is_file()</code>来判断是否为文件。</p>
 				</section>
-				<section class='content-section' id='design'>
-					<h1>haomeii</h1>
-					<p>liyonguuudded kdfeo dlfeom</p>
+				<section class='content-section' id='session'>
+					<h1>会话控制</h1>
+					<p>会话控制能更方便地服务和管理用户。</p>
+					<h2>Cookie</h2>
+					<p>cookie 保存在客户端，每次浏览器发送请求的时候都会搜索保存cookie文件的目录，若存在对应域名的cookie，则连同请求头一起发送到目标服务器；<br>cookie 的创建可以在访问服务器后由响应头来决定是否创建，或者由客户自主创建。</p>
+					<p>功能如显示用户上次访问的时间，代码如下：</p>
+<pre>
+&lt;?php
+    date_default_timezone_set("Asia/Chongqing");  //设置PHP默认时区
+    if(!empty($_COOKIE['lastVisit'])){
+        echo "您上次访问的时间是:".$_COOKIE['lastVisit'];
+    }else{
+        echo "欢迎您首次访问";
+    }
+    setcookie('lastVisit',date('Y-m-d H:i:s'),time()+24*3600*30);  //新建cookie，一个月之后过期
+?&gt;
+</pre>
+					<p>需要事先设置默认时区，如上第一行代码，也可以在php.ini文件中设置：<br><code>date.timezone = Asia/Chongqing</code></p>
+					<h3><a href="http://www.w3school.com.cn/php/func_http_setcookie.asp" target="_blank">setcookie</a></h3>
+					<code>bool setcookie ( string $name [, string $value = "" [, int $expire = 0 [, string $path = "" [, string $domain = "" [, bool $secure = false [, bool $httponly = false ]]]]]] )</code>
+					<p>该函数可以新建、更新、删除 cookie。常用的参数为<code>$name</code>键名，<code>$value</code>键值，<code>$expire</code>过期时间戳。</p>
+					<h2>Session</h2>
+<h3>session概述</h3>
+<p>①session文件存放于服务器端，windows系统下的路径是：c:\window\temp\<br>
+②文件名以sess_开头<br>
+③一个session文件对应一个会话（浏览器连接期间，具体根据http1.1协议）<br>
+④当会话结束后，若没有手动删除session文件，则自动等到垃圾回收<br>
+⑤session数据默认存在时间为1440s（24min），可以在php.ini的[session]节配置<br>
+<code>session.gc_maxlifetine = 1440</code><br>
+该时间指无操作的时间<br>
+⑥session文件存放路径php.ini修改，默认没有设置存放路径，自动根据平台来存放<br>
+<code>session.save_path = "c:/mysession"</code><br>
+⑦自动启用session，php.ini配置（不推荐）<br>
+<code>session.auto_start = 1</code></p>
+
+<h3>session的使用</h3>
+<p>1.session初始化<br>
+<pre>
+session_start();	//声明使用session，并根据cookie情况读取/创建session文件
+$_SESSION['index']="value";	//给session创建变量，执行后系统自动保存到文件
+</pre>
+以记事本打开创建的文件，可以看到如下信息：<br>
+<code>index|s:5:"value";</code>
+其中s表示值的字符串数据类型，5表示值的字节大小</p>
+
+<p>2.session能保存除特殊类型之外的数据类型<br>
+可以是string、integer、double、bool、array、object</p>
+
+<p>3.获取session信息：<br>
+①需要事先声明使用session<br>
+<code>session_start();</code><br>
+②直接使用$_SESSION超全局变量来获取信息<br>
+<code>$_SESSION['index'];</code><br>
+③获取对象的信息时，需要在本进程中重新声明该对象对应的类</p>
+
+<p>4.删除session信息<br>
+<pre>
+session_start();
+unset($_SESSION['index']);  //删除某一个session
+session_destroy();  //删除所有session，该函数会把session文件删除
+</pre>
+</p>
+
+<h3>session原理</h3>
+<p>1.不同进程属于同一个会话<br>
+原因是服务器创建了一个session文件后，http响应头会返回一个:<br>
+<code>Set-Cookie:PHPSESSID = sess_文件名</code><br>
+由此客户端会创建一个cookie文件，用于保存session文件名，再次发送http请求时服务器就会知道该使用哪个session文件。</p>
+
+<p>2.客户端禁用cookie情况下使用session
+当浏览器禁用了cookie后，服务器页面每次接收请求就会创建一个session文件，这样就不能在别的请求（进程）使用session的信息（为空）
+原因就是服务器无法识别与客户端对应的session文件，因为客户端没有cookie记录他自己对应的session文件。</p>
+
+<p>解决方法：</p>
+<p>方法一：<br>
+使用session_id()函数<br>
+①利用GET方法提交的数据来记录PHPSESSID，如下代码：</p>
+<pre>
+session_start();    //根据cookie情况创建/读取session文件
+$sessId=session_id();    //获取目前进程session的文件名
+echo "&lt;a href='#?PHPSESSID=$sessId'&gt;###&lt;/a&gt;"
+</pre>
+<p>②然后在别的页面和本页面如下代码：
+<pre>
+if(isset($_GET['PHPSESSID'])){
+session_id($_GET['PHPSESSID']);//设置当前进程session文件名
+}
+session_start();				//启用session，根据情况创建/读取session文件
+</pre>
+如上步骤就能不使用cookie在不同进程中使用同一个会话</p>
+
+
+<p>方法二：<br>
+使用系统常量SID<br>
+<pre>
+echo SID;    //显示类似为 PHPSESSID=fdjsaghuewa3gk30
+</pre>
+方法同上一种方法。也是通过GET方法来传递session文件名</p>
+
+<p>方法三：<br>
+修改php.ini配置启用<br>
+<code>session.use_trans_sid = 1</code><br>
+启用透明SID支持：<br>
+启用该配置会自动在请求中（herf action header）添加SID，但js跳转不支持；该方法也是使用GET方法来传递session文件名<br>
+该方法受系统平台影响,完全支持Linux。</p>
+
+
+<h3>cookie/session相关配置</h3>
+<p>(1)session的名字<br>
+<code>session_name()</code><br>
+该函数返回session在cookie中的键名,默认为PHPSESSID<br>
+可以在php.ini中修改<br>
+<code>session.name = PHPSESSID</code><br>
+该配置用于识别接收cookie中的session信息<br>
+php代码：<br>
+<pre>
+session_name()."=".session_id();  //等价于系统常量SID
+</pre>
+
+<p>(2)session存放路径<br>
+<code>session.save_path = "c:/mysession"</code></p>
+
+<p>(3)控制session文件存在时间（gc机制，系统中有一个gc函数）<br>
+<code>session.gc_maxlifetime = 1440</code><br>
+session文件生命周期，单位秒,无访问该时间后文件自动归为垃圾文件<br>
+<code>session.gc_probability = 1</code><br>
+<code>session.gc_divisor = 1000</code><br>
+以上两个配置表示PHP执行session_start()函数时，调用垃圾处理器的概率为1‰</p>
+
+<p>(4)透明SID启用<br>
+<code>session.use_trans_sid = 0</code><br>
+默认不启用，就是系统会在所有请求中自动在url添加SID，用来防止客户端禁用cookie导致session不能正常使用。</p>
+
+<p>(5)session关于cookie相关配置<br>
+<code>session.cookie_lifetime = 0</code> 默认为0表示浏览器关闭后，该会话的cookie文件失效<br>
+<code>session.use_cookies = 1</code> 默认表示启用cookie<br>
+<code>session.cookie_path = /</code> 表示cookie保存路径，默认为平台相关，并且删除cookie时对应的路径<br>
+<code>session.domain_name = </code> 表生成的cookie域名，默认自动获取生成，通常无需设置</p>
+
+<p>(6)自定义会话处理器（即session或者cookie）<br>
+<code>session.save_handler = files /[user|memcache]</code><br>
+该配置可以设定session信息保存时相应的规则，如开头文件名（默认sess_）、保存方式（默认保存到磁盘文件，可设定临时存到内存里、数据库、网络文件（用于网络分布式开发）等）...<br>
+files 表示使用系统给的处理器配置<br>
+user 表示使用自定的处理器配置，具体配置步骤如下：<br>
+<pre>
+function open(){
+...
+}
+function close(){
+...
+}
+...
+session_set_save_handler("open","close","read","write","destroy","gc");
+//该函数表示需要执行的函数，共包含有六个回调函数，可自定以，也可参考PHP手册给出的官方设定的函数
+</pre>
+</p>
 				</section>
 			</div>
 			<div class="col-sm-3">

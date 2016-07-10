@@ -33,7 +33,7 @@ nav .dropdown-menu .divider{
 #F1{
 	margin:50px 0;
 }
-#F1 a:hover,#F1 a:focus{
+#F1 a:hover,#F1 a:focus,h3{
 	color:#337ab7;
 }
 .bs-docs-sidenav > li > a {
@@ -73,7 +73,6 @@ nav .dropdown-menu .divider{
 .content-section p{
 	padding:10px 0;
 }
-
 footer{
 	text-align:center;
 }

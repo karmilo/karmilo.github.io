@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>页面切换动画</title>
+<style>
+	@font-face{
+		font-family:"PWHandySocialIcons";
+		src:url('./font/PWHandySocialIcons.ttf') format('truetype');
+		font-weight:normal;
+		font-style:normal;
+	}
+	*{
+		margin:0;
+		padding:0;
+	}
+	body{
+		font-family:'Georgia','serif';
+		font-weight:400;
+		font-size:15px;
+		overflow:hidden; /* 去除滚动条 */
+		-webkit-font-smoothing:antialiased; /* 字体抗锯齿 */
+		-moz-font-smoothing:antialiased;
+		-o-font-smoothing:antialiased;
+		-ms-font-smoothing:antialiased;
+		font-smoothing:antialiased;
+	}
+	a{
+		text-decoration:none;
+		color:#fff;
+	}
+	.scroll-container{
+		width:100%;
+		height:100%;
+		position:absolute;
+		left:0;
+		top:0;
+	}
+	.scroll-container > a,
+	.scroll-container > input{
+		width:20%;
+		height:34px;
+		line-height:34px;
+		position:fixed;
+		bottom:0;
+	}
+	.scroll-container > input{
+		opacity:0;  /* 隐藏单选按钮 */
+		z-index:1000;
+	}
+	.scroll-container > a{
+		z-index:100;
+		font-weight:600;
+		text-align:center;
+		background:#333;
+	}
+	#scroll-nav-1,
+	#scroll-nav-1 + a{
+		left:0%;
+	}
+	#scroll-nav-2,
+	#scroll-nav-2 + a{
+		left:20%;
+	}
+	#scroll-nav-3,
+	#scroll-nav-3 + a{
+		left:40%;
+	}
+	#scroll-nav-4,
+	#scroll-nav-4 + a{
+		left:60%;
+	}
+	#scroll-nav-5,
+	#scroll-nav-5 + a{
+		left:80%;
+	}
+	.scroll-container > input:checked + a,
+	.scroll-container > input:checked:hover + a{ /* 被选中的input的hover颜色不变 */
+		background:#000;
+	}
+	.scroll-container > input:hover + a{
+		background:#222;
+	}
+	.scroll-container > input:checked + a:after{ /* 导航按钮添加三角形 */
+		content:'';
+		width:0;
+		height:0;
+		overflow:hidden;
+		border:15px solid transparent;
+		border-bottom-color:#000;
+		position:absolute;
+		bottom:100%;  /* 置顶 */
+		left:50%;          /* 居中 */
+		margin-left:-15px; /* 居中 */
+	}
+	/* 内容 */
+	.scroll-section{
+		width:100%;
+		height:100vh; /* 每一页占满整个窗口 */
+		overflow:hidden;
+		position:relative; /* 防止子元素absolute定位在body上 */
+	}
+	.scroll-section:nth-child(even){
+		background:#444;
+		color:#fff;
+	}
+	.scroll-section:nth-child(odd){
+		background:#FFF;
+		color:#444;
+	}
+	.scroll-content{
+		height:100vh; /* 方便translateY设置的参数 */
+		-webkit-transform:translate3d(0,0,0); /* translate 用于平移变换 3d 可以开启GPU硬件加速 */
+		-moz-transform:translate3d(0,0,0);
+		-o-transform:translate3d(0,0,0);
+		-ms-transform:translate3d(0,0,0);
+		transform:translate3d(0,0,0);
+		-webkit-backface-visibility:hidden; /* 隐藏未见的元素，切换效果更好 */
+		-moz-backface-visibility:hidden;
+		-o-backface-visibility:hidden;
+		-ms-backface-visibility:hidden;
+		backface-visibility:hidden;
+		-webkit-transition:all 0.8s ease-in-out; /* 设置变换效果，all包括平移，变换时间，模式快变慢 */
+		-moz-transition:all 0.8s ease-in-out;
+		-o-transition:all 0.8s ease-in-out;
+		-ms-transition:all 0.8s ease-in-out;
+		transition:all 0.8s ease-in-out;
+	}
+	/* 定义滚动 !!!!!! */
+	#scroll-nav-1:checked ~ .scroll-content{
+		-webkit-transform:translateY(0%);
+		-moz-transform:translateY(0%);
+		-o-transform:translateY(0%);
+		-ms-transform:translateY(0%);
+		transform:translateY(0%);
+	}
+	#scroll-nav-2:checked ~ .scroll-content{
+		-webkit-transform:translateY(-100%);
+		-moz-transform:translateY(-100%);
+		-o-transform:translateY(-100%);
+		-ms-transform:translateY(-100%);
+		transform:translateY(-100%);
+	}
+	#scroll-nav-3:checked ~ .scroll-content{
+		-webkit-transform:translateY(-200%);
+		-moz-transform:translateY(-200%);
+		-o-transform:translateY(-200%);
+		-ms-transform:translateY(-200%);
+		transform:translateY(-200%);
+	}
+	#scroll-nav-4:checked ~ .scroll-content{
+		-webkit-transform:translateY(-300%);
+		-moz-transform:translateY(-300%);
+		-o-transform:translateY(-300%);
+		-ms-transform:translateY(-300%);
+		transform:translateY(-300%);
+	}
+	#scroll-nav-5:checked ~ .scroll-content{
+		-webkit-transform:translateY(-400%);
+		-moz-transform:translateY(-400%);
+		-o-transform:translateY(-400%);
+		-ms-transform:translateY(-400%);
+		transform:translateY(-400%);
+	}
+	/* 分页面内容 */
+	.section-icon{
+		width:20vw;
+		height:20vw;
+		position:absolute;
+		left:50%;
+		top:0;
+		margin-left:-10vw;
+		margin-top:-10vw;
+		 -webkit-transform:rotate(45deg);
+		-moz-transform:rotate(45deg);
+		-o-transform:rotate(45deg);
+		-ms-transform:rotate(45deg);
+		transform:rotate(45deg);
+	}
+	.scroll-section:nth-child(odd) > .section-icon{
+		background:#444;
+		color:#fff;
+	}
+	.scroll-section:nth-child(even) > .section-icon{
+		background:#FFF;
+		color:#444;
+	}
+	[data-icon]:after{
+		content:attr(data-icon); /* 内容为属性值 */
+		width:20vw;
+		height:20vw;
+		line-height:20vw;
+		text-align:center;
+		font-size:9vw;
+		position:absolute;
+		left:50%;
+		top:50%;
+		transform:rotate(-45deg) translateY(-9vw);
+		font-family:"PWHandySocialIcons";
+	}
+	/* @font-face 是css3中的一个模块，用于将自己定义的web字体嵌入到网页中
+		@font-face{
+			font-family:"字体名称"; //可以任意取
+			src:url('字体文件路径') format('文件格式')[,...];
+			[font-weight:字体粗细;]
+			[font-style:字体倾斜等样式;]
+		}
+	*/
+	/* 文本内容 */
+	.scroll-section > h2,
+	.scroll-section > p{
+		width:80%;
+		text-align:center;
+		position:absolute;
+		left:10% /* 居中 */
+	}
+	.scroll-section > h2{
+		font-size:55px;
+		top:35%;
+	}
+	.scroll-section > p{
+		font-size:20px;
+		top:55%;
+	}
+	/* 文本内容动画 begin */
+	#scroll-nav-1:checked ~ .scroll-content #scroll-section-1 > h2, /* 必须每个都要定义 */
+	#scroll-nav-2:checked ~ .scroll-content #scroll-section-2 > h2,
+	#scroll-nav-3:checked ~ .scroll-content #scroll-section-3 > h2,
+	#scroll-nav-4:checked ~ .scroll-content #scroll-section-4 > h2,
+	#scroll-nav-5:checked ~ .scroll-content #scroll-section-5 > h2{
+		-webkit-animation:moveDown 0.8s ease-in-out 0.2s backwards; /* 定义动画 */
+		-moz-animation:moveDown 0.8s ease-in-out 0.2s backwards;
+		-o-animation:moveDown 0.8s ease-in-out 0.2s backwards;
+		-ms-animation:moveDown 0.8s ease-in-out 0.2s backwards;
+		animation:moveDown 0.8s ease-in-out 0.2s backwards;
+	}
+	@-webkit-keyframes moveDown{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			-webkit-transform:translateY(-40px);
+			opacity:0;
+		}
+		100%{
+			-webkit-transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	@-moz-keyframes moveDown{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			-moz-transform:translateY(-40px);
+			opacity:0;
+		}
+		100%{
+			-moz-transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	@-o-keyframes moveDown{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			-o-transform:translateY(-40px);
+			opacity:0;
+		}
+		100%{
+			-o-transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	@-ms-keyframes moveDown{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			-ms-transform:translateY(-40px);
+			opacity:0;
+		}
+		100%{
+			-ms-transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	@keyframes moveDown{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			transform:translateY(-40px);
+			opacity:0;
+		}
+		100%{
+			transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	#scroll-nav-1:checked ~ .scroll-content #scroll-section-1 > p, /* 必须每个都要定义 */
+	#scroll-nav-2:checked ~ .scroll-content #scroll-section-2 > p,
+	#scroll-nav-3:checked ~ .scroll-content #scroll-section-3 > p,
+	#scroll-nav-4:checked ~ .scroll-content #scroll-section-4 > p,
+	#scroll-nav-5:checked ~ .scroll-content #scroll-section-5 > p{
+		-webkit-animation:moveUp 0.8s ease-in-out 0.2s backwards; /* 定义动画 */
+		-moz-animation:moveUp 0.8s ease-in-out 0.2s backwards;
+		-o-animation:moveUp 0.8s ease-in-out 0.2s backwards;
+		-ms-animation:moveUp 0.8s ease-in-out 0.2s backwards;
+		animation:moveUp 0.8s ease-in-out 0.2s backwards;
+	}
+	@-webkit-keyframes moveUp{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			-webkit-transform:translateY(40px);
+			opacity:0;
+		}
+		100%{
+			-webkit-transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	@-moz-keyframes moveUp{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			-moz-transform:translateY(40px);
+			opacity:0;
+		}
+		100%{
+			-moz-transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	@-o-keyframes moveUp{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			-o-transform:translateY(40px);
+			opacity:0;
+		}
+		100%{
+			-o-transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	@-ms-keyframes moveUp{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			-ms-transform:translateY(40px);
+			opacity:0;
+		}
+		100%{
+			-ms-transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	@keyframes moveUp{ /* 定义moveDown动画 */
+		0%{ /* 初始化可以用from、0%这两个，结束可以使用to、100% */
+			transform:translateY(40px);
+			opacity:0;
+		}
+		100%{
+			transform:translateY(0px);
+			opacity:1;
+		}
+	}
+	/* 文本内容动画 end */
+	/* 自适应 begin */
+	@media screen and (min-width:360px) and (max-width:680px){
+		.section-icon{
+			width:40vw;
+			height:40vw;
+			margin-left:-20vw;
+			margin-top:-20vw;
+		}
+		[data-icon]:after{
+			width:40vw;
+			height:40vw;
+			line-height:40vw;
+			font-size:18vw;
+			transform:rotate(-45deg) translateY(-18vw);
+		}
+	}
+	@media screen and (max-width:360px){
+		.section-icon{
+			width:80vw;
+			height:80vw;
+			margin-left:-40vw;
+			margin-top:-40vw;
+		}
+		[data-icon]:after{
+			width:80vw;
+			height:80vw;
+			line-height:80vw;
+			font-size:36vw;
+			transform:rotate(-45deg) translateY(-36vw);
+		}
+		.scroll-section > h2{
+			font-size:40px;
+		}
+		.scroll-section > p{
+			font-size:14px;
+		}
+		.scroll-container > a{
+			font-size:10px;
+		}
+	}
+	/* 自适应 end */
+</style>
+</head>
+<body>
+<div class="scroll-container">
+	<input type="radio" name="scroll-radio" checked="checked" id="scroll-nav-1">
+	<a href="#scroll-section-1">第一页</a>
+	<input type="radio" name="scroll-radio" id="scroll-nav-2">
+	<a href="#scroll-section-2">第二页</a>
+	<input type="radio" name="scroll-radio" id="scroll-nav-3">
+	<a href="#scroll-section-3">第三页</a>
+	<input type="radio" name="scroll-radio" id="scroll-nav-4">
+	<a href="#scroll-section-4">第四页</a>
+	<input type="radio" name="scroll-radio" id="scroll-nav-5">
+	<a href="#scroll-section-5">第五页</a>
+<!-- 内容 -->
+	<div class="scroll-content">
+		<section class="scroll-section" id="scroll-section-1">
+			<div class="section-icon" data-icon="a"></div>
+			<h2>第一页</h2>
+			<p>内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1 END</p>
+		</section>
+		<section class="scroll-section" id="scroll-section-2">
+			<div class="section-icon" data-icon="b"></div>
+			<h2>第二页</h2>
+			<p>内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2 END</p>
+		</section>
+		<section class="scroll-section" id="scroll-section-3">
+			<div class="section-icon" data-icon="c"></div>
+			<h2>第三页</h2>
+			<p>内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3内容3 END</p>
+		</section>
+		<section class="scroll-section" id="scroll-section-4">
+			<div class="section-icon" data-icon="d"></div>
+			<h2>第四页</h2>
+			<p>内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4内容4 END</p>
+		</section>
+		<section class="scroll-section" id="scroll-section-5">
+			<div class="section-icon" data-icon="e"></div>
+			<h2>第五页</h2>
+			<p>内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5内容5 END</p>
+		</section>
+	</div>
+<div>
+</body>
+</html>
